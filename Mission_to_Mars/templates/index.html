@@ -1,10 +1,46 @@
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="en">
 
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Data</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
 
-    <body>
-        <h1>Scraper</h1>
-        <p><a href="/scrape">Get Data!</a></p>
-    </body>
+<body>
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1>Data on Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
+    </div>
+    <!-- Mars Info --> 
+    <div class='row'>
+        <div class="col-md-7">
+        <h3>Featured Image</h3>
+        <img src="{{ mars_data.feature_img_url }}" alt="Feature_img">
+    </div>
+    <div class="col-md-5">
+        <h4>Mars Facts</h4>
+        <p>{{mars_data.facts}}</p> 
+    </div>
+</div>
+    <div class="row" id="mars_data">
+      <div class="col-md-12">
+        <h2 class="heading">Latest Mars News</h2>
+        <h4 class="heading">{{mars_data.Title}}</h4>
+        <small>{{mars_data.Paragraph}}</small>
+      </div>
+    </div>
+    <div class='row'>
+        <div class="col-md-12"> 
+            <h2 class="text-center" class="heading">Mars Hemispheres</h2>
+            <img src="{{mars_data.hemisphere_image_urls}}" alt="hemispheres">
+        </div>
+    </div>
+  </div>
+  {{ html_string | safe }}
+</body>
+
 </html>

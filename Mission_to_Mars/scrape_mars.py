@@ -60,9 +60,10 @@ def scrape_info():
 
     featured_image_url = "https://www.jpl.nasa.gov" + image_src
     print(f' The featured image url is: {featured_image_url}')
+   
+    mars_data['feature_img_url'] = featured_image_url
 
-
-    ######-------Mars Weather---------------------------------------------------
+    ######-------Mars Facts---------------------------------------------------
 
 
     url = 'https://space-facts.com/mars/'
@@ -76,8 +77,9 @@ def scrape_info():
     facts_html=df.to_html(header=False, index=False)
     print(facts_html)
 
-
+    mars_data['facts'] = facts_html
     tables
+
 
 #####------Mars Hemispheres---------------------------------------------------
 
@@ -124,7 +126,7 @@ def scrape_info():
         {"title": "Syrtis Major Hemisphere", "img_url": "..."},
     ]
 
-
+    mars_data['hemisphere_image_urls'] = hemisphere_image_urls
 
     browser.quit()
     return mars_data
