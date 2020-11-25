@@ -28,9 +28,10 @@ def scrape_info():
     url = 'https://mars.nasa.gov/news/'
 
     soup = newget_soup('https://mars.nasa.gov/news/', browser)
+    time.sleep(3)
     results = soup.find('li', class_='slide')
-    print(results)
-
+    # print(results)
+    time.sleep(1)
     news_title = results.find('div', class_='content_title').a.text
     news_para = results.find('div', class_='article_teaser_body').text
 
@@ -108,27 +109,23 @@ def scrape_info():
         soup = BeautifulSoup(response.text,"html.parser")
         
         # find full image url
-        new_url = soup.find("img", class_="wide-image")["src"]
+        new_url = soup.find("div", class_='downloads').li.a['href']
         
         # create full image url
-        full_url = "https://astrogeology.usgs.gov" + new_url
+        full_url = new_url
         
-    
+
         #make a dict and append to the list
         hemisphere_img_urls.append({"title": title, "img_url": full_url})
+        time.sleep(1)
 
-    hemisphere_img_urls
+    
 
-    hemisphere_image_urls = [
-        {"title": "Valles Marineris Hemisphere", "img_url": "..."},
-        {"title": "Cerberus Hemisphere", "img_url": "..."},
-        {"title": "Schiaparelli Hemisphere", "img_url": "..."},
-        {"title": "Syrtis Major Hemisphere", "img_url": "..."},
-    ]
 
-    mars_data['hemisphere_image_urls'] = hemisphere_image_urls
+    mars_data['hemisphere_image_urls'] = hemisphere_img_urls
 
-    browser.quit()
+    time.sleep(1)
+
     return mars_data
-
-
+    
+    browser.quit()

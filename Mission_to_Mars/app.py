@@ -22,7 +22,7 @@ def home():
 
 @app.route('/scrape')
 def scrape():
-    mars_data = mongo.db.mars_data
+    # mars_data = mongo.db.mars_data
     # Run the scrape function
     mars_data = scrape_mars.scrape_info()
     # Update the Mongo database using update and upsert=True

@@ -18,14 +18,14 @@
     <!-- Mars Info --> 
     <div class='row'>
         <div class="col-md-7">
-        <h3>Featured Image</h3>
-        <img src="{{ mars_data.feature_img_url }}" alt="Feature_img">
-    </div>
+         <h3>Featured Image</h3>
+         <img src="{{ mars_data.feature_img_url }}" alt="Feature_img" class="w-50 h-50">
+        </div>
     <div class="col-md-5">
         <h4>Mars Facts</h4>
-        <p>{{mars_data.facts}}</p> 
+        <p>{{mars_data.facts|safe}}</p> 
     </div>
-</div>
+ </div>
     <div class="row" id="mars_data">
       <div class="col-md-12">
         <h2 class="heading">Latest Mars News</h2>
@@ -33,14 +33,36 @@
         <small>{{mars_data.Paragraph}}</small>
       </div>
     </div>
-    <div class='row'>
-        <div class="col-md-12"> 
-            <h2 class="text-center" class="heading">Mars Hemispheres</h2>
-            <img src="{{mars_data.hemisphere_image_urls}}" alt="hemispheres">
+</div>
+    <div class='container'>
+        <h2 class="heading-center">Mars Hemispheres</h2>
+        <div class="col-md-6">
+            {% for image in mars_data.hemisphere_image_urls %}
+            <div class="card"> 
+                {%print(image.img_url)%}
+                <img class="img-thumbnail" src="{{image.img_url}}" class="card-img-top" alt="{{image.title}}">
+                <div class="card-body">
+                    <h4 class="card-title">{{image.title}}</h4>
+                </div>
+             </div>
+            {% endfor %}
         </div>
     </div>
-  </div>
-  {{ html_string | safe }}
+    <div class='container'>
+        <h2 class="heading-center">Mars Hemispheres2</h2>
+        <div class="col-md-6">
+            {% for image in mars_data.hemisphere_image_urls %}
+            <div class="card"> 
+
+                <img class="thumbnail" src="{{ image['img_url'] }}" class="card-img-top" alt="{{ image['title'] }}">
+                <div class="card-body">
+                    <h4 class="card-title">{{ image['title'] }}</h4>
+                </div>
+                
+             </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 
 </html>
