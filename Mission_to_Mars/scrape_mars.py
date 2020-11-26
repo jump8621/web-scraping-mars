@@ -28,10 +28,12 @@ def scrape_info():
     url = 'https://mars.nasa.gov/news/'
 
     soup = newget_soup('https://mars.nasa.gov/news/', browser)
-    time.sleep(3)
+    browser.is_text_present('splinter') 
+    browser.is_text_present('splinter', wait_time=10) 
+    browser.is_text_present('text not present') 
     results = soup.find('li', class_='slide')
     # print(results)
-    time.sleep(1)
+    time.sleep(2)
     news_title = results.find('div', class_='content_title').a.text
     news_para = results.find('div', class_='article_teaser_body').text
 

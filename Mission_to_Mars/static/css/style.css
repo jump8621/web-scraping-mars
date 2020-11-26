@@ -1,0 +1,17 @@
+
+.jumbotron {
+    background-color: #795548;
+}
+ 
+.img-fluid{
+    max-width: 100%;
+    height: auto;
+}
+
+h2 {
+    color: red;
+}
+
+/* .card {
+    @include media-breakpoint-up(sm)
+} */
