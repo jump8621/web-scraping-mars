@@ -1,12 +1,8 @@
 
 .jumbotron {
-    background-color: #795548;
+    background-color: secondary;
 }
  
-.img-fluid{
-    max-width: 100%;
-    height: auto;
-}
 
 h2 {
     color: red;
