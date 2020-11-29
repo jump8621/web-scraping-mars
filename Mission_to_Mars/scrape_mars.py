@@ -29,57 +29,23 @@ def scrape_info():
 
     soup = newget_soup('https://mars.nasa.gov/news/', browser)
     
-    # try:
-    #     browser.is_text_present('splinter') 
-    # browser.is_text_present('splinter', wait_time=10) 
-    # browser.is_text_present('text not present') 
-    # results = soup.find('li', class_='slide')
-    # print(results)
-    # if browser.is_element_present_by_class('slide') == True:
-        
-        
-    # # browser.is_text_present('splinter') 
-    # # browser.is_text_present('splinter', wait_time=10) 
-    # # browser.is_text_present('text not present')
-    # # # time.sleep(2)
-    #     results = soup.find('li', class_='slide')
-    #     news_title = results.find('div', class_='content_title').a.text
-    #     news_para = results.find('div', class_='article_teaser_body').text
-
-    #     print(f"Title is: {news_title}")
-    #     print("---------")
-    #     print(f"Paragraph is : {news_para}")
-
-    #     mars_data['Title'] = news_title
-    #     mars_data['Paragraph'] = news_para
-
-    # else:
-    #     time.sleep(10)
-    #     if browser.is_text_present == False:
-    #         print("Data could not load")
-    #     else:
-    #         results = soup.find('li', class_='slide')
-    #         news_title = results.find('div', class_='content_title').a.text
-    #         news_para = results.find('div', class_='article_teaser_body').text
-    #         mars_data['Title'] = news_title
-    #         mars_data['Paragraph'] = news_para
 
     try:
+        for x in range(2):
+            element = browser.is_element_present_by_tag('li', wait_time=30)
+            print(element)
+            if element:
+                break
         results = soup.find('li', class_='slide')
         news_title = results.find('div', class_='content_title').a.text 
         news_para = results.find('div', class_='article_teaser_body').text       
     except AttributeError as e:    
-        print('Tag was not found')
-    else:
-        if news_title == None:
-            print('Tag was not found')
-        else:
-            print(news_title)
+        news_title = 'error: Tag was not found'
+        news_para = 'error: Tag was not found'
 
 
-
-        mars_data['Title'] = news_title
-        mars_data['Paragraph'] = news_para
+    mars_data['Title'] = news_title
+    mars_data['Paragraph'] = news_para
 
 
     #######------Feature Image - Mars-----------------------------------------------------
@@ -95,7 +61,6 @@ def scrape_info():
 
     soup = BeautifulSoup(browser.html,'html.parser')
 
-
     image_src = soup.find("img", class_="main_image")['src']
     print(image_src)
 
@@ -110,16 +75,13 @@ def scrape_info():
     url = 'https://space-facts.com/mars/'
 
     tables = pd.read_html(url)
-    tables
     df=tables[0]
     df.columns= ['Description', 'Value']
-    df.head()
     df.set_index(['Description'])
     facts_html=df.to_html(header=False, index=False)
-    print(facts_html)
 
     mars_data['facts'] = facts_html
-    tables
+ 
 
 
 #####------Mars Hemispheres---------------------------------------------------
@@ -165,7 +127,7 @@ def scrape_info():
     mars_data['hemisphere_image_urls'] = hemisphere_img_urls
 
     time.sleep(1)
-
+    browser.quit()
     return mars_data
     
-    browser.quit()
+
