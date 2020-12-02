@@ -31,7 +31,7 @@ def scrape_info():
     
 
     try:
-        for x in range(2):
+        for x in range(3):
             element = browser.is_element_present_by_tag('li', wait_time=30)
             print(element)
             if element:
@@ -119,14 +119,12 @@ def scrape_info():
 
         #make a dict and append to the list
         hemisphere_img_urls.append({"title": title, "img_url": full_url})
-        time.sleep(1)
+        
 
     
 
-
     mars_data['hemisphere_image_urls'] = hemisphere_img_urls
 
-    time.sleep(1)
     browser.quit()
     return mars_data
     
